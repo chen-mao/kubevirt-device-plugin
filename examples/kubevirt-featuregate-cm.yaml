@@ -1,0 +1,19 @@
+apiVersion: kubevirt.io/v1alpha3
+kind: KubeVirt
+metadata:
+  name: kubevirt
+  namespace: kubevirt
+spec:
+  imagePullPolicy: IfNotPresent
+  certificateRotateStrategy: {}
+  configuration:
+    permittedHostDevices:
+       pciHostDevices:
+       # whitelist the permitted devices here
+       - pciVendorSelector: "1eed:1330"
+         resourceName: "xdxct.com/Pangu_A0"
+         externalResourceProvider: false
+    imagePullPolicy: IfNotPresent
+    developerConfiguration:
+      featureGates:
+        - GPU
