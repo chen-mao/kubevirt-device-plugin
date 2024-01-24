@@ -27,11 +27,13 @@ spec:
   terminationGracePeriodSeconds: 0
   volumes:
   - containerDisk:
-      image: kubevirt/fedora-cloud-container-disk-demo:latest
+      image: ucloud-kvm:20.04
     name: containerdisk
   - cloudInitNoCloud:
       userData: |-
         #cloud-config
-        password: fedora
+        user: ubuntu
+        password: 123
         chpasswd: { expire: False }
+        ssh_pwauth: True
     name: cloudinitdisk
