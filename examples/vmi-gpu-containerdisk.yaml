@@ -7,6 +7,8 @@ metadata:
   name: vmi-gpu
 spec:
   domain:
+    cpu:
+      cores: 4
     devices:
       disks:
       - disk:
@@ -15,6 +17,9 @@ spec:
       - disk:
           bus: virtio
         name: cloudinitdisk
+      - disk:
+          bus: virtio
+        name: emptydisk
       gpus:
       - deviceName: xdxct.com/Pangu_A0
         name: gpu1
@@ -23,12 +28,15 @@ spec:
       type: ""
     resources:
       requests:
-        memory: 1024M
+        memory: 8192M
   terminationGracePeriodSeconds: 0
   volumes:
   - containerDisk:
       image: ucloud-kvm:20.04
     name: containerdisk
+  - emptyDisk:
+      capacity: 10G
+    name: emptydisk
   - cloudInitNoCloud:
       userData: |-
         #cloud-config

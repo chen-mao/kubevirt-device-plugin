@@ -1,0 +1,45 @@
+apiVersion: kubevirt.io/v1alpha3
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/vm: xdxct-lab-ubuntu-test
+  name: vmi-gpu
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vm: xdxct-lab-ubuntu-test
+    spec:
+      domain:
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: mydisk
+          - disk:
+              bus: virtio
+            name: cloudinitdisk
+          gpus:
+          - deviceName: xdxct.com/Pangu_A0
+            name: gpu1
+          rng: {}
+        machine:
+          type: ""
+        resources:
+          requests:
+            cpu: 4
+            memory: 8Gi
+      terminationGracePeriodSeconds: 0
+      volumes:
+      - persistentVolumeClaim:
+          claimName: ucloud-focal-disk 
+        name: mydisk
+      - cloudInitNoCloud:
+          userData: |-
+            #cloud-config
+            user: ubuntu
+            password: 123
+            chpasswd: { expire: False }
+            ssh_pwauth: True
+        name: cloudinitdisk

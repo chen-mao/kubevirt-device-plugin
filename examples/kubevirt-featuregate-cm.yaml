@@ -17,3 +17,5 @@ spec:
     developerConfiguration:
       featureGates:
         - GPU
+        - HardDisk
+        - DataVolumes
