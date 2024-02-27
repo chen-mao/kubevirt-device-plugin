@@ -21,6 +21,7 @@ const (
 	DeviceNamespace = "xdxct.com"
 	vfioDevicePath  = "/dev/vfio"
 	gpuPrefix       = "PCI_RESOURCE_XDXCT_COM"
+	vgpuPrefix      = "MDEV_PCI_RESOURCE_XDXCT_COM"
 	connectTimeOut  = 5 * time.Second
 )
 
@@ -265,7 +266,7 @@ func (dp *GenericDevicePlugin) Allocate(ctx context.Context, reqs *pluginapi.All
 			envList[key] = append(envList[key], devAddrs...)
 		}
 		envs := buildEnv(envList)
-		log.Printf("Allocated devices %s", envs)
+		log.Printf("Allocated devices: %s", envs)
 		response := pluginapi.ContainerAllocateResponse{
 			Envs:    envs,
 			Devices: deviceSpecs,
