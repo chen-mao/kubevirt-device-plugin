@@ -3,8 +3,8 @@ apiVersion: kubevirt.io/v1alpha3
 kind: VirtualMachineInstance
 metadata:
   labels:
-    special: vmi-vgpu
-  name: vmi-vgpu2
+    special: vmi-vgpu-128
+  name: vmi-vgpu-128
 spec:
   domain:
     devices:
@@ -16,7 +16,7 @@ spec:
           bus: virtio
         name: cloudinitdisk
       gpus:
-      - deviceName: xdxct.com/XGV_V0_1G_1_CORE
+      - deviceName: xdxct.com/XGV_V0_128M_1_CORE
         name: vgpu2
         virtualGPUOptions:
           display: 

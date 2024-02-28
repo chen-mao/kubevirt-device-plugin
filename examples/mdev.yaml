@@ -16,6 +16,9 @@ spec:
       - mdevNameSelector: xgv-XGV_V0_1G_1_CORE 
         resourceName: xdxct.com/XGV_V0_1G_1_CORE
         externalResourceProvider: true
+      - mdevNameSelector: xgv-XGV_V0_128M_1_CORE 
+        resourceName: xdxct.com/XGV_V0_128M_1_CORE
+        externalResourceProvider: true
     imagePullPolicy: IfNotPresent
     developerConfiguration:
       featureGates:

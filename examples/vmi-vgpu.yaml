@@ -3,8 +3,8 @@ apiVersion: kubevirt.io/v1alpha3
 kind: VirtualMachineInstance
 metadata:
   labels:
-    special: vmi-vgpu
-  name: vmi-vgpu
+    special: vmi-vgpu-1
+  name: vmi-vgpu-1
 spec:
   domain:
     devices:
