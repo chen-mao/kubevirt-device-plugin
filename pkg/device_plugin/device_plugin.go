@@ -49,6 +49,7 @@ func createDevicePlugins() {
 	var devicePlugins []*GenericDevicePlugin
 	var vgpuDevicePlugins []*GenericVgpuDevicePlugin
 	var devs []*pluginapi.Device
+	var deviceName string
 	log.Printf("Device Map %s", deviceMap)
 	for k, v := range deviceMap {
 		devs = nil
@@ -58,11 +59,7 @@ func createDevicePlugins() {
 				Health: pluginapi.Healthy,
 			})
 		}
-		deviceName := getDeviceName(k)
-		if deviceName == "" {
-			log.Printf("Error: Cloud not find device Name for device ID: %s", k)
-			deviceName = k
-		}
+		deviceName = k
 		log.Printf("Device Name: %s", deviceName)
 		dp := NewGenericaDevicePlugin(deviceName, "/sys/kernel/iommu_groups/", devs)
 		err := startDevicePlugin(dp)
@@ -81,10 +78,7 @@ func createDevicePlugins() {
 				Health: pluginapi.Healthy,
 			})
 		}
-		deviceName := getVgpuDeviceName(k)
-		if deviceName == "" {
-			deviceName = k
-		}
+		deviceName = k
 		log.Printf("vGPU Device name: %s", deviceName)
 		dp := NewGenericaVgpuDevicePlugin(deviceName, vGpuBasePath, devs)
 		err := startVgpuDevicePlugin(dp)
@@ -239,14 +233,6 @@ func readGpuIDFromVgpu(basePath string, deviceAddress string) (string, error) {
 }
 func getIommuMap() map[string][]XdxctGpuDevice {
 	return iommuMap
-}
-
-func getDeviceName(deviceID string) string {
-	return "Pangu_A0"
-}
-
-func getVgpuDeviceName(deviceID string) string {
-	return "XGV_V0_1G_1_CORE"
 }
 
 func startDevicePlugin(dp *GenericDevicePlugin) error {
