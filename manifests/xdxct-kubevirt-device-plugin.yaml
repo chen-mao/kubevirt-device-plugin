@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: xdxct-kubevirt-deviceplugin-ds
-  namespace: kube-system
 spec:
   selector:
     matchLabels:
@@ -20,7 +19,7 @@ spec:
         operator: Exists
       containers:
       - name: xdxct-kubevirt-gpu-dp-ctr
-        image: hub.xdxct.com/kubevirt/kubevirt-device-plugin:v0.1.0
+        image: hub.xdxct.com/kubevirt/kubevirt-device-plugin:devel
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

@@ -1,5 +1,5 @@
 DOCKER_REPO ?= "hub.xdxct.com/kubevirt/kubevirt-device-plugin"
-DOCKER_IMAGE_TAG ?= v0.1.0
+DOCKER_IMAGE_TAG ?= devel
 
 build:
 	go build -o xdxct-kubevirt-device-plugin kubevirt-device-plugin/cmd
